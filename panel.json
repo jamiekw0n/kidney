@@ -1,0 +1,12 @@
+{
+  "he_mpp": 0.507,
+  "provenance": "Pixel size and zero-based CODEX channel order supplied by the user on 2026-10-08; not yet checked against TIFF metadata.",
+  "panel": [
+    "DAPI", "CD14", "CTNNB1", "ZO1", "CD8", "BCL2", "CDH1", "CD4",
+    "PDPN", "aSMA", "Ki67", "NF2", "CAV", "COLIV", "CD45", "IL6",
+    "NES", "CD1a", "AQP2", "UMOD", "PODXL", "CD34", "CD10", "PAX2",
+    "CD93", "POSTN", "STAT1", "CD31", "HIF2a", "ATM", "IFNA6", "CDK1",
+    "CD138", "GATA3", "PARP1", "Cd11c", "CAIX", "PanCK", "PCNA", "PTEN",
+    "VIM", "HIF1a"
+  ]
+}

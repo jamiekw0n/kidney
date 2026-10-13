@@ -1,0 +1,435 @@
+{
+  "base": "/scratch/groups/emmalu/hande_annotation",
+  "samples": [
+    {
+      "sample_id": "B06035",
+      "directory": "/scratch/groups/emmalu/hande_annotation/B06035",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06035/B06035_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06035/20240708_d1_kid_3_B06035_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "B06439",
+      "directory": "/scratch/groups/emmalu/hande_annotation/B06439",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06439/B06439_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06439/20241009_d1_kid_3_B06439_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "B06458",
+      "directory": "/scratch/groups/emmalu/hande_annotation/B06458",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06458/B06458_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/B06458/20240423_d1_kid_3_B06458_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "F03600",
+      "directory": "/scratch/groups/emmalu/hande_annotation/F03600",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/F03600/F03600_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/F03600/20241122_d1_kid_3_F03600_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2110291",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2110291",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110291/K2110291_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110291/20240418_d1_kid_3_K2110291_Scan2.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2110292",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2110292",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110292/K2110292_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110292/20240421_d1_kid_3_K2110292_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2110338",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2110338",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110338/K2110338_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110338/20240421_d1_kid_3_K2110338_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2110400",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2110400",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110400/K2110400_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2110400/20241011_d1_kid_3_K2110400_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2120208",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2120208",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2120208/K2120208_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2120208/20241001_d1_kid_3_K2120208_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2140220",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2140220",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2140220/K2140220_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2140220/20240423_d1_kid_3_K2140220_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2140231",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2140231",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2140231/K2140231_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2140231/20240917_d1_kid_3_K2140231_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2150043",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2150043",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150043/K2150043_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150043/20240425_d1_kid_3_K2150043_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2150044",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2150044",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150044/K2150044_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150044/20241108_d1_kid_3_K2150044_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2150099",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2150099",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150099/K2150099_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2150099/20240917_d1_kid_3_K2150099_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2412058",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2412058",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412058/K2412058_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412058/20241112_d1_kid_3_K2412058_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2412102",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2412102",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412102/K2412102_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412102/20240611_d1_kid_3_K2412102_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2412104",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2412104",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412104/K2412104_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412104/20241009_d1_kid_3_K2412104_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2412123",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2412123",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412123/K2412123_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412123/20240708_d1_kid_3_K2412123_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "K2412130",
+      "directory": "/scratch/groups/emmalu/hande_annotation/K2412130",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412130/K2412130_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/K2412130/20241010_d1_kid_3_K2412130_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5021017",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5021017",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021017/M5021017_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021017/20241217_d1_kid_3_M5021017_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5021019",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5021019",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021019/M5021019_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021019/20240723_d1_kid_3_M5021019_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5021031",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5021031",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021031/M5021031_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021031/20240703_d1_kid_3_M5021031_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5021036",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5021036",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021036/M5021036_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021036/20240703_d1_kid_3_M5021036_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5021043",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5021043",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021043/M5021043_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5021043/20240723_d1_kid_3_M5021043_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5172067",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5172067",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5172067/M5172067_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5172067/20241113_d1_kid_3_M5172067_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5172099",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5172099",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5172099/M5172099_HandE.tiff"
+      ],
+      "codex_candidates": [],
+      "errors": [
+        "Expected one QPTIFF; found 0"
+      ]
+    },
+    {
+      "sample_id": "M5172118",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5172118",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5172118/M5172118_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5172118/20240613_d1_kid_3_M5172118_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5173023",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5173023",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173023/M5173023_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173023/20241217_d1_kid_3_M5173023_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5173144",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5173144",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173144/M5173144_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173144/20240924_d1_kid_3_M5173144_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5173197",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5173197",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173197/M5173197_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5173197/20241113_d1_kid_3_M5173197_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5174001",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5174001",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174001/M5174001_HandE.tiff"
+      ],
+      "codex_candidates": [],
+      "errors": [
+        "Expected one QPTIFF; found 0"
+      ]
+    },
+    {
+      "sample_id": "M5174018",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5174018",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174018/M5174018_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174018/20240604_d1_kid_3_M5174018_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5174057",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5174057",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174057/M5174057_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174057/20240418_d1_kid_3_M5174057.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "M5174062",
+      "directory": "/scratch/groups/emmalu/hande_annotation/M5174062",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174062/M5174062_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/M5174062/20241010_d1_kid_3_M5174062_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "R389",
+      "directory": "/scratch/groups/emmalu/hande_annotation/R389",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R389/R389_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R389/20240604_d1_kid_3_R389_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "R415",
+      "directory": "/scratch/groups/emmalu/hande_annotation/R415",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R415/R415_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R415/20241011_d1_kid_3_R415_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "R417",
+      "directory": "/scratch/groups/emmalu/hande_annotation/R417",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R417/R417_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R417/20241108_d1_kid_3_R417_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "R420",
+      "directory": "/scratch/groups/emmalu/hande_annotation/R420",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R420/R420_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R420/20241112_d1_kid_3_R420_Scan1.qptiff"
+      ],
+      "errors": []
+    },
+    {
+      "sample_id": "R471",
+      "directory": "/scratch/groups/emmalu/hande_annotation/R471",
+      "he_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R471/R471_HandE.tiff"
+      ],
+      "codex_candidates": [
+        "/scratch/groups/emmalu/hande_annotation/R471/20240612_d1_kid_3_R471_Scan1.qptiff"
+      ],
+      "errors": []
+    }
+  ],
+  "note": "File pairing only; patient identity, channels, scale, and support require verification."
+}
