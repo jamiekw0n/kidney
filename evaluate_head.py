@@ -46,22 +46,29 @@ def render_sample(out,meta,xy,y,pred,markers):
         if high<=low: high=low+1
         a=sparse_grid(xy,y[:,j],meta['shape'],stride)
         b=sparse_grid(xy,pred[:,j],meta['shape'],stride)
-        figure,axes=plt.subplots(1,3,figsize=(14,4),constrained_layout=True)
+        figure,axes=plt.subplots(1,4,figsize=(18,4),constrained_layout=True)
         extent=(0,meta['shape'][1],meta['shape'][0],0)
         for ax,grid,title in zip(axes[:2],(a,b),('Measured mIF','Predicted marker')):
             im=ax.imshow(grid,cmap=cmap,vmin=low,vmax=high,extent=extent,interpolation='nearest')
             ax.set_title(title);ax.set_xlabel('x (native pixels)');ax.set_ylabel('y (native pixels)')
         figure.colorbar(im,ax=list(axes[:2]),label='Exported intensity; shared display scale',shrink=0.8)
-        axes[2].scatter(y[:,j],pred[:,j],s=3,alpha=0.3,rasterized=True)
+        error=np.abs(pred[:,j]-y[:,j])
+        error_grid=sparse_grid(xy,error,meta['shape'],stride)
+        error_high=max(float(np.percentile(error,99)),1e-6)
+        error_cmap=plt.get_cmap('magma').copy();error_cmap.set_bad('#e5e7eb')
+        error_image=axes[2].imshow(error_grid,cmap=error_cmap,vmin=0,vmax=error_high,extent=extent,interpolation='nearest')
+        axes[2].set_title('Absolute prediction error');axes[2].set_xlabel('x (native pixels)');axes[2].set_ylabel('y (native pixels)')
+        figure.colorbar(error_image,ax=axes[2],label='Absolute error',shrink=0.8)
+        axes[3].scatter(y[:,j],pred[:,j],s=3,alpha=0.3,rasterized=True)
         bounds=[float(combined.min()),float(combined.max())]
         if bounds[0]==bounds[1]: bounds[1]+=1
-        axes[2].plot(bounds,bounds,'--',color='black',linewidth=1)
-        axes[2].set_xlabel('Measured intensity');axes[2].set_ylabel('Predicted intensity');axes[2].set_title('Matched locations; dashed identity line')
+        axes[3].plot(bounds,bounds,'--',color='black',linewidth=1)
+        axes[3].set_xlabel('Measured intensity');axes[3].set_ylabel('Predicted intensity');axes[3].set_title('Matched locations; dashed identity line')
         figure.suptitle(f'{meta["sample_id"]} | {marker} | sampled locations, not dense maps')
         filename=f'marker_{index:02d}.png';figure.savefig(out/filename,dpi=160);plt.close(figure)
         cards.append(f'<h3>{html.escape(marker)}</h3><img style="max-width:100%" src="{filename}">')
-        display.append({'marker':marker,'low':float(low),'high':float(high),'stride':stride})
-    (out/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Marker prediction review</title><h1>'+html.escape(meta['sample_id'])+'</h1><p>Gray cells are unsampled. Each square represents one sampled central 8x8 target; it does not establish expression throughout the larger stride cell. Maps share intensity limits within each marker. Clipping affects display only. Scatter plots use all raw predictions.</p>'+''.join(cards))
+        display.append({'marker':marker,'low':float(low),'high':float(high),'error_high':error_high,'stride':stride})
+    (out/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Marker prediction review</title><h1>'+html.escape(meta['sample_id'])+'</h1><p>Role: '+html.escape(meta.get('evaluation_role','unspecified'))+'; validation used for checkpoint selection is not independent testing.</p><p>Gray cells are unsampled. Each square represents one sampled central 8x8 target; it does not establish expression throughout the larger stride cell. Maps share intensity limits within each marker. Clipping affects display only. Scatter plots use all raw predictions.</p>'+''.join(cards))
     write_json(out/'display_settings.json',display)
 
 
@@ -73,9 +80,11 @@ def main():
     p.add_argument('--out',required=True)
     p.add_argument('--markers',nargs='+',default=['CD10','VIM','NES','UMOD','DAPI'])
     p.add_argument('--batch-size',type=int,default=256);p.add_argument('--device',default='cpu')
+    p.add_argument('--bootstrap-replicates',type=int,default=2000)
+    p.add_argument('--bootstrap-seed',type=int,default=42)
     p.add_argument('--no-plots',action='store_true')
     a=p.parse_args()
-    if a.batch_size<1 or len(set(a.markers))!=len(a.markers): p.error('Invalid batch size or duplicate display markers')
+    if a.bootstrap_replicates<1 or a.bootstrap_seed<0 or a.batch_size<1 or len(set(a.markers))!=len(a.markers): p.error('Invalid batch size or duplicate display markers')
     import torch
     from train import make_head,load_group,predict
     from validate import validate
@@ -114,7 +123,7 @@ def main():
             targets.append(y);xs.append(raw);coordinates.append(xy)
         y,pred,xy=np.concatenate(targets),np.concatenate(xs),np.concatenate(coordinates)
         ys.append(y);ps.append(pred);ids.extend([meta['patient_id']]*len(y))
-        if not a.no_plots: render_sample(sample,meta,xy,y,pred,a.markers)
+        if not a.no_plots: render_sample(sample,{**meta,'evaluation_role':a.role},xy,y,pred,a.markers)
         write_json(sample/'manifest.json',{**meta,'role':a.role,'checkpoint':str(Path(a.checkpoint).resolve()),
             'arrays':['xy','target','prediction'],'complete':True})
         event(out,'sample_complete',sample_id=meta['sample_id'],rows=len(y))
@@ -122,6 +131,8 @@ def main():
     report={'model':metrics(y,pred,patients,ckpt['panel']),
         'training_mean_baseline':metrics(y,np.tile(baseline,(len(y),1)),patients,ckpt['panel'])}
     write_json(out/'metrics.json',report)
+    from primary_evaluation import save_primary
+    save_primary(out,report['model'],a.role,a.bootstrap_replicates,a.bootstrap_seed)
     with (out/'marker_summary.csv').open('w',newline='') as f:
         writer=csv.writer(f);writer.writerow(['marker','patient_mean_model_mae','patient_mean_baseline_mae','mae_reduction_percent','patient_mean_pearson'])
         for marker in ckpt['panel']:

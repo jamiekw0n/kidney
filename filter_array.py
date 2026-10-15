@@ -30,6 +30,7 @@ def make_plan(a):
     code=root/'source_snapshot'
     shutil.copy2(Path(__file__).parent/'slurm/filter_sample_array.sbatch',code/'filter_sample_array.sbatch')
     config={k:getattr(a,k) for k in ('base_dir','mpp','stride','max_per_sample','min_context','min_center','he_cache_gb','seed','valid_mask_name','assume_all_valid')}
+    config['traceback_after']=a.traceback_after
     write_json(root/'plan.json',{'config':config,'tasks':tasks,'excluded':excluded,'code':str(code)})
     command=['sbatch','--parsable','--partition='+a.partition,'--mem='+a.mem,'--time='+a.time,
         f'--array=0-{len(tasks)-1}%{a.concurrency}',f'--output={root}/logs/%A_%a.out',f'--error={root}/logs/%A_%a.err',
@@ -59,7 +60,8 @@ def run_task(a):
     command=[sys.executable,'-u',str(Path(plan['code'])/'cohort_prepare.py'),
         '--base-dir',config['base_dir'],'--panel',str(root/'panel.json'),'--out',str(directory/'prepared'),
         '--samples',task['sample_id'],'--mpp',str(config['mpp']),'--samples-as-patients',
-        '--seed-index-offset',str(task['seed_index']),'--progress-every','100']
+        '--seed-index-offset',str(task['seed_index']),'--progress-every','100',
+        '--traceback-after',str(config.get('traceback_after',120))]
     for flag,key in [('stride','stride'),('max-per-sample','max_per_sample'),('min-context','min_context'),
                      ('min-center','min_center'),('he-cache-gb','he_cache_gb'),('seed','seed')]:
         command.extend(['--'+flag,str(config[key])])
@@ -117,6 +119,7 @@ def main():
     support=plan.add_mutually_exclusive_group(required=True)
     support.add_argument('--assume-all-valid',action='store_true');support.add_argument('--valid-mask-name')
     for name,value in [('stride',128),('max-per-sample',5000),('seed',42),('concurrency',2)]:plan.add_argument('--'+name,type=int,default=value)
+    plan.add_argument('--traceback-after',type=int,default=120,help='Periodic diagnostic stack dump; 0 disables for controlled retries')
     plan.add_argument('--min-context',type=float,default=0.5);plan.add_argument('--min-center',type=float,default=0.5)
     plan.add_argument('--he-cache-gb',type=float,default=8);plan.add_argument('--partition',default='emmalu')
     plan.add_argument('--mem',default='64G');plan.add_argument('--time',default='06:00:00');plan.add_argument('--submit',action='store_true')
@@ -124,7 +127,7 @@ def main():
     c=sub.add_parser('collect');c.add_argument('--run',required=True);c.add_argument('--assemble');c.add_argument('--allow-partial',action='store_true')
     a=p.parse_args()
     if a.mode=='plan':
-        if a.concurrency<1 or a.max_per_sample<1 or a.stride<8 or a.stride%8 or a.seed<0 or a.mpp<=0 or a.he_cache_gb<0 or not 0<=a.min_context<=1 or not 0<=a.min_center<=1:
+        if a.traceback_after<0 or a.concurrency<1 or a.max_per_sample<1 or a.stride<8 or a.stride%8 or a.seed<0 or a.mpp<=0 or a.he_cache_gb<0 or not 0<=a.min_context<=1 or not 0<=a.min_center<=1:
             p.error('Invalid filtering or concurrency setting')
         make_plan(a)
     elif a.mode=='task':return run_task(a)

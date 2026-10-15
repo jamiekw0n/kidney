@@ -32,11 +32,14 @@ def main():
     p.add_argument('--seed',type=int,default=42); p.add_argument('--hidden',type=int,default=0)
     p.add_argument('--epochs',type=int,default=100); p.add_argument('--patience',type=int,default=10)
     p.add_argument('--batch-size',type=int,default=256); p.add_argument('--lr',type=float,default=1e-3)
+    p.add_argument('--intensity-max',type=float,help='Fixed target range scaling; forwarded to train.py')
     p.add_argument('--log1p',action='store_true'); p.add_argument('--device',default='cuda')
+    p.add_argument('--bootstrap-replicates',type=int,default=2000)
+    p.add_argument('--bootstrap-seed',type=int,default=42)
     p.add_argument('--plan-only',action='store_true',help='Write audited folds without training; rerun to a NEW directory for execution')
     p.add_argument('--max-numeric-gb',type=float,default=8,help='Refuse estimated numeric peak above this limit; excludes framework/model overhead')
     a=p.parse_args()
-    if min(a.epochs,a.patience,a.batch_size)<1 or a.hidden<0 or a.lr<=0 or a.max_numeric_gb<=0 or a.seed<0:
+    if a.bootstrap_replicates<1 or a.bootstrap_seed<0 or min(a.epochs,a.patience,a.batch_size)<1 or a.hidden<0 or a.lr<=0 or a.max_numeric_gb<=0 or a.seed<0:
         p.error('Invalid training parameters')
     from validate import validate
     roots=sorted(path.parent for path in Path(a.cache_root).glob('*/manifest.json'))
@@ -44,6 +47,7 @@ def main():
     inventory=[]; numeric=0; meta=None
     for root in roots:
         report=validate(root); m=read_meta(root)
+        if m.get('diagnostic_only'): p.error('Diagnostic-only caches are not cohort evaluation data')
         if m.get('encoder')!='UNI2-h': p.error('Expected UNI2-h feature caches')
         if meta is None: meta=m
         n=report['rows']; numeric+=n*(1536+len(m['panel']))*4
@@ -60,9 +64,11 @@ def main():
         source=Path(a.cache_root)/reportfile
         if source.exists(): write_json(out/reportfile,json.loads(source.read_text()))
     event(out,'fold_plan',patients=len(set(r['patient_id'] for r in inventory)),folds=len(folds),numeric_peak_estimate=numeric*3,
-          protocol='Outer patient evaluation; inner patient holdout for early stopping. Hyperparameters fixed before outer evaluation.')
+          parent_evaluation_device='cpu',training_device=a.device,protocol='Outer patient evaluation; inner patient holdout for early stopping. Hyperparameters fixed before outer evaluation.')
     if a.plan_only:
         print(f'Fold plan saved to {out}; no training performed.'); return
+    # Parent never acquires a CUDA context: only each isolated trainer uses GPU.
+    # CPU scoring is cheap for cached features and avoids exclusive-process conflicts.
     import torch
     from train import make_head,load_group,predict
     patient_results={}; patient_baselines={}
@@ -73,13 +79,14 @@ def main():
             '--epochs',str(a.epochs),'--patience',str(a.patience),'--batch-size',str(a.batch_size),
             '--lr',str(a.lr),'--seed',str(a.seed+i),'--device',a.device]
         if a.log1p: command.append('--log1p')
+        if a.intensity_max is not None: command.extend(['--intensity-max',str(a.intensity_max)])
         event(out,'fold_training_start',fold=i,command=command,split=split)
         with (fold/'training.log').open('w') as log:
             code=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT).returncode
         if code:
             event(out,'failed',fold=i,returncode=code); raise RuntimeError(f'Fold {i} failed; inspect {fold}/training.log')
-        checkpoint=torch.load(fold/'training'/'best.pt',map_location=a.device,weights_only=True)
-        model=make_head(torch,len(meta['panel']),checkpoint['hidden']).to(a.device)
+        checkpoint=torch.load(fold/'training'/'best.pt',map_location='cpu',weights_only=True)
+        model=make_head(torch,len(meta['panel']),checkpoint['hidden']).to('cpu')
         model.load_state_dict(checkpoint['state_dict'])
         groups=partitions(roots,split)
         # Combine every sample belonging to the same test patient before scoring.
@@ -90,7 +97,7 @@ def main():
         for patient in split['test']:
             patient_roots=[root for root in groups['test'] if read_meta(root)['patient_id']==patient]
             x,y,patient_ids=load_group(patient_roots)
-            raw=scale(predict(torch,model,x,a.device,a.batch_size),checkpoint['scaler'],inverse=True)
+            raw=scale(predict(torch,model,x,'cpu',a.batch_size),checkpoint['scaler'],inverse=True)
             evaluated=metrics(y,raw,patient_ids,meta['panel'])
             evaluated_baseline=metrics(y,np.tile(baseline,(len(y),1)),patient_ids,meta['panel'])
             patient_results[patient]=evaluated; patient_baselines[patient]=evaluated_baseline
@@ -107,7 +114,6 @@ def main():
             write_json(fold/(patient+'_metrics.json'),{'model':evaluated,'training_mean_baseline':evaluated_baseline})
         event(out,'fold_complete',fold=i,best_epoch=checkpoint['epoch'],test_patients=split['test'])
         del model,checkpoint,x,y,raw
-        if torch.cuda.is_available(): torch.cuda.empty_cache()
         write_json(out/'oof_patient_metrics.json',{'model':patient_results,'training_mean_baseline':patient_baselines})
     summary={}
     for marker in meta['panel']:
@@ -119,6 +125,9 @@ def main():
                 finite=[v for v in values if v is not None]
                 summary[marker][name][metric]={'patient_mean':float(np.mean(finite)) if finite else None,
                     'patient_std':float(np.std(finite,ddof=1)) if len(finite)>1 else None,'defined_patients':len(finite)}
+    from primary_evaluation import save_primary
+    merged={marker:{'patients':{patient:record[marker]['patients'][patient] for patient,record in patient_results.items()}} for marker in meta['panel']}
+    save_primary(out,merged,'out_of_fold',a.bootstrap_replicates,a.bootstrap_seed)
     write_json(out/'oof_summary.json',summary); event(out,'complete',evaluated_patients=len(patient_results))
     print(f'Cross-validation complete: {out}/oof_summary.json')
 

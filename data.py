@@ -48,8 +48,15 @@ def partitions(caches, split):
     return result
 
 
-def fit_scaler(targets, patients, log1p=False):
+def fit_scaler(targets, patients, log1p=False, intensity_max=None):
     """Equal-patient moments; targets are transformed before standardization."""
+    if intensity_max is not None:
+        if log1p or not np.isfinite(intensity_max) or intensity_max <= 0:
+            raise ValueError('Fixed 0-1 scaling needs positive intensity_max and no log1p')
+        if not np.isfinite(targets).all() or (targets < 0).any() or (targets > intensity_max).any():
+            raise ValueError('Measured targets outside declared 0..intensity_max range')
+        return {'mean': [0.]*targets.shape[1], 'std': [float(intensity_max)]*targets.shape[1],
+                'log1p': False, 'mode': 'fixed_0_1', 'intensity_max': float(intensity_max)}
     means, seconds = [], []
     for patient in np.unique(patients):
         y = targets[patients == patient].astype(np.float64)
@@ -69,6 +76,8 @@ def scale(y, state, inverse=False):
     if inverse:
         y = y * std + mean
         return np.expm1(y) if state['log1p'] else y
+    if state.get('mode') == 'fixed_0_1' and (not np.isfinite(y).all() or (y < 0).any() or (y > state['intensity_max']).any()):
+        raise ValueError('Measured targets outside declared fixed intensity range')
     if state['log1p']:
         if (y < 0).any():
             raise ValueError('Negative targets with log1p')

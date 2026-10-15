@@ -44,7 +44,7 @@ if [[ ${#UNI2_CACHES[@]} -eq 0 ]]; then echo 'No matching caches found'; exit 1;
 "$UNI2_PYTHON" -u "$UNI2_CODE/evaluate_head.py" \
   --checkpoint "$UNI2_CHECKPOINT" --caches "${UNI2_CACHES[@]}" \
   --role "$UNI2_ROLE" --out "$UNI2_OUT" --device cpu \
-  --markers CD10 VIM NES UMOD DAPI
+  --markers PODXL VIM CAV CD10 CDH1 aSMA DAPI UMOD
 cp "$0" "$UNI2_OUT/submitted_script.sbatch"
 "$UNI2_PYTHON" -m pip freeze > "$UNI2_OUT/environment.txt"
 echo 'Evaluation completed. Inspect marker_summary.csv and sample index.html galleries.'

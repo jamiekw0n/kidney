@@ -51,6 +51,7 @@ def main():
     p.add_argument('--lr', type=float, default=1e-3)
     p.add_argument('--seed', type=int, default=42)
     p.add_argument('--log1p', action='store_true', help='Only for nonnegative measured intensities')
+    p.add_argument('--intensity-max', type=float, help='Use y/intensity_max instead of z scoring; e.g. 255 only for verified uint8 targets')
     p.add_argument('--device', default='cuda')
     a = p.parse_args()
     if min(a.epochs, a.patience, a.batch_size) < 1 or a.hidden < 0 or a.lr <= 0:
@@ -59,6 +60,8 @@ def main():
     from validate import validate
     for root in a.caches:
         validate(root)
+        if read_meta(root).get('diagnostic_only'):
+            raise ValueError('Diagnostic-only data must not be used for training')
     groups = partitions(a.caches, split)
     meta = read_meta(groups['train'][0])
     out = Path(a.out)
@@ -69,7 +72,7 @@ def main():
     np.random.seed(a.seed)
     x, y, patients = load_group(groups['train'])
     vx, vy, vp = load_group(groups['val'])
-    scaler = fit_scaler(y, patients, a.log1p)
+    scaler = fit_scaler(y, patients, a.log1p, a.intensity_max)
     sy, svy = scale(y, scaler), scale(vy, scaler)
     model = make_head(torch, len(meta['panel']), a.hidden).to(a.device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=a.lr, weight_decay=1e-4)
@@ -84,7 +87,7 @@ def main():
     write_json(out/'target_scaler.json',scaler)
     event(out,'training_start',split=split,train_rows=len(x),validation_rows=len(vx),
           head_hidden=a.hidden,encoder_frozen=True,optimizer='AdamW',lr=a.lr,weight_decay=1e-4,
-          loss='Huber delta=1, equal standardized marker weights',sampling='equal expected patient sampling',
+          loss='Huber delta=1, equal marker weights in selected target scale',target_scaling=scaler.get('mode','patient_balanced_zscore'),sampling='equal expected patient sampling',
           torch_version=torch.__version__,device=a.device)
     history, best, stale = [], float('inf'), 0
     for epoch in range(a.epochs):
