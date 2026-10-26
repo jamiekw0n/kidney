@@ -1,0 +1,10 @@
+# Reuse the workstation environment; do not replace its CUDA PyTorch installation.
+# torch>=2.3 is also required; install CUDA-compatible PyTorch separately if absent.
+numpy>=1.24
+scipy>=1.10
+# Only comparison plotting needs matplotlib:
+matplotlib>=3.6
+
+# Optional dense ROI inference also requires the existing pipeline packages:
+# timm, torchvision (compatible with torch), Pillow, tifffile, zarr, imagecodecs.
+# Reuse the already working kidney-uni2 environment rather than replacing it.

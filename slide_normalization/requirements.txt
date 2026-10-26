@@ -1,0 +1,6 @@
+# Reuse the existing kidney-uni2 environment. Do not silently replace packages.
+numpy>=1.24
+# Tests:
+scipy>=1.10
+# Existing compatible tifffile/zarr/imagecodecs stack required for QPTIFF reads.
+# Existing CUDA-compatible torch>=2.3 required for training; no encoder/timm needed.

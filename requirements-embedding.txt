@@ -1,0 +1,5 @@
+# Optional CPU annotation/UMAP analysis; no torch or encoder updates needed.
+umap-learn>=0.5.8,<0.6
+scikit-learn>=1.6
+scipy>=1.10
+matplotlib>=3.8

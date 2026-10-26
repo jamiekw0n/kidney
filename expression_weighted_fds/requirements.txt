@@ -1,0 +1,10 @@
+# Reuse the existing kidney-uni2 environment; no automatic installation.
+# PyTorch >=2.3 required; preserve its existing CUDA-compatible installation.
+numpy>=1.24
+# SciPy is used by independent kernel tests, not training:
+scipy>=1.10
+# Only comparison plotting requires Matplotlib:
+matplotlib>=3.6
+
+# Optional dense ROI review uses the existing working image-inference packages:
+# timm, torchvision compatible with torch, Pillow, tifffile, zarr, imagecodecs.

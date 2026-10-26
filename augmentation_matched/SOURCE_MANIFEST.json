@@ -1,0 +1,31 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "AGENTS.md": "f15f4018fb42b43bacc66df92b338d1212048f22ec0f4b24f1e8387b22e7623c",
+    "README.md": "2e5dc58e0bbe7f2217a0ac8712f09bf461bfa214891729f51c08f878d64deeae",
+    "VALIDATION.md": "9a49124cedf174955d7ea274d954e1caea5a2fdc766e6885f944dbed054e1278",
+    "audit.py": "c5a0a9daed85eaef01a4aa6595d5eabe71d66d6d773b011a4947eeaa017cbe61",
+    "augment.py": "82896c48fa86db20595e0497db8afcdbb483412db2b62375e8db945bc625f130",
+    "config.py": "d5f49eba870114ca2f5e74e382f41950831e8fc4ae2bbde868ea36c34793595b",
+    "data.py": "7911fd14c8a00181922e065f36fd8ac4241a150760bfea9ec0dcd780a74ed1b2",
+    "encoder_runtime.py": "03cce37e5ab59d8e5c0d4ac65221ae8cf591eb813c7b82483c729b4a2df982d5",
+    "expression.py": "26b8aac236825f5fa0b57fb50fd44c141a4f739a5b6e36d3ae13a9d673c6b9b0",
+    "fds.py": "9e1ba739179be913106639d3913215e456c7310d0ef6b892921c286e50ad5360",
+    "feature_views.py": "8130a98d990e2ad4347a987566145a130a8d5287bd5af2f783881a9aebe8eb7a",
+    "io_utils.py": "705115709a46993a5b898509c9dd15dd93591419e5941c285e3e02e850b5d86f",
+    "loss.py": "45a5fa720e4d6dedd419768b522cf650b592fa17d44e79871be1986160bff5dd",
+    "metrics.py": "753d2c3d7c97915105f174b955fd6e5c3414324010688edcd29d87c91fc4094f",
+    "model.py": "fe41dd4647492f154f0ffee0236748adbb6290450015cce30194ea569a72f611",
+    "pipeline.py": "3d346050dfd7cd50a0dcf6f39550a6693ad0abc218f9b30fd76eb43fca2e19ba",
+    "plot_comparison.py": "a4906dd20e331b2ece8fab980d030eb96c5fef5055eaba4a039aae494740fc8f",
+    "primary_evaluation.py": "8edbdec3c333a0ffb638a921a5a2b0db35ec617f2a5c5f9f70900be7dce50131",
+    "run_direct.py": "8e4951122809a4d09c2ec8c295fe55363ac423f38ac261ec7fa9829feca16b68",
+    "test_augmentation.py": "1edda885a2fda0b4075f65f06021efb8e4e1210ae8c4e0215be0c313ec683b1f",
+    "test_direct.py": "55def43438db56b82c044de7b6e83469b21fb4de9e2ccf4fc98cff6174dc8835",
+    "test_expression.py": "12d68c38738ee63270ea7ec23a4d67240c1bd6d61af2d9476fde3a67fb1a993a",
+    "test_fds.py": "44ee22a3e1e26b0cc1e31a06a5dc2aebd7648b7efda201fa6ad8ae72d5188112",
+    "test_matching.py": "217c37b241238f36223481a3c89ef8d54efb9f0b922ae7dcb0a2d0f9e6951105",
+    "train.py": "e316e6e2c8f64c417136256cd8eca14eab4f9585a9fbf7e0e87a06d6e09520ab",
+    "validate.py": "c51e7fb9c1d81d253eb622400dfc93874dc8d6a08d1fadf8ac3ba1fd00a63e2f"
+  }
+}

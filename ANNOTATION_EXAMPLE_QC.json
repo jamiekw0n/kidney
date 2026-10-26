@@ -1,0 +1,121 @@
+{
+  "source": "/Users/jamiekwon/Downloads/K2110291.csv",
+  "source_bytes": 269809120,
+  "scope": "Intact records only; malformed records excluded for read-only diagnostics, not accepted as a clean analysis dataset",
+  "column_count": 136,
+  "valid_records": 195315,
+  "invalid_records": [
+    {
+      "line": 2,
+      "issue": "header embedded inside second cell record"
+    },
+    {
+      "line": 3,
+      "fields": 130
+    }
+  ],
+  "duplicates_in_intact_records": 0,
+  "xy_quantiles_0_1_50_99_100": [
+    [
+      66.0,
+      562.0
+    ],
+    [
+      1320.0,
+      1642.0
+    ],
+    [
+      6665.0,
+      10299.0
+    ],
+    [
+      13689.859999999986,
+      17447.0
+    ],
+    [
+      15028.0,
+      17905.0
+    ]
+  ],
+  "all_xy_integer_valued": true,
+  "nonfinite_xy": 0,
+  "size_whole_nuclear_percentiles_1_50_99": [
+    [
+      135.0,
+      54.0
+    ],
+    [
+      502.0,
+      144.0
+    ],
+    [
+      1326.859999999986,
+      323.0
+    ]
+  ],
+  "missing_whole_nuclear_sizes": [
+    0,
+    587
+  ],
+  "label_counts": {
+    "cell_type_merged": {
+      "stromal": 39730,
+      "glomerular_endothelial": 28732,
+      "unresolved": 19954,
+      "proximal_tubule": 46412,
+      "collecting_duct": 7846,
+      "immune": 8047,
+      "distal_nephron": 24742,
+      "other_tubular": 6619,
+      "glomerular_epithelial": 6818,
+      "vascular": 6415
+    },
+    "cell_type_new": {
+      "connective_tissue": 39730,
+      "activated_glo_endothelium": 11927,
+      "other": 19954,
+      "prox_tub_CD10/CD138": 18190,
+      "collecting_duct": 7846,
+      "prox_tub_CD138": 10845,
+      "prox_tub_CD10": 17377,
+      "pan_leukocyte": 5309,
+      "endothelial": 10947,
+      "distal_tubule": 14752,
+      "epithelial": 6619,
+      "immature_NES": 2937,
+      "glomerular_endothelium": 5858,
+      "vascular": 6415,
+      "dendritic_cell": 2738,
+      "gl_PODXL+": 898,
+      "loop_of_Henle": 9990,
+      "gl_NES+/PODXL+": 2983
+    },
+    "compartment_refined": {
+      "stromal": 39730,
+      "glomerular": 16642,
+      "unassigned": 19954,
+      "tubular": 85619,
+      "immune": 8811,
+      "vascular": 24559
+    },
+    "cell_state_primary": {
+      "other": 89724,
+      "inflammatory_response": 44540,
+      "BCL2+": 8571,
+      "T_helper": 2849,
+      "proliferative_Ki67": 831,
+      "basement_membrane": 7643,
+      "cytotoxic_T": 2460,
+      "fibrosis": 6236,
+      "aSMA+_CD31+_CAV+": 3638,
+      "hypoxic_ischemic_injury": 914,
+      "PARP1+_CDK1-": 27909
+    },
+    "annotation_confidence": {
+      "high": 186629,
+      "medium": 5613,
+      "soft": 3073
+    }
+  },
+  "unit_metadata_columns": []
+}
